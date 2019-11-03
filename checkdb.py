@@ -6,9 +6,9 @@
 import json
 import requests 
 
-url = "http://localhost:5000/allEvents"  
+# url = "http://localhost:5000/allEvents"  
 
-# url = "http://orllem.pythonanywhere.com/"
+url = "orllem.pythonanywhere.com/allEvents"
 
 # data = {'location': '[0.5,43.3]', 'people': '3', 'urgency':'green', 'description':'We did it!'}
 # data = {'sender': 'Alice', 'receiver': 'Bob', 'message':'We did it!'}
@@ -23,4 +23,4 @@ response = requests.get(
         "x": 10.2,
         "y": 11.3 },
 )
-# print(r)
+print(response)
