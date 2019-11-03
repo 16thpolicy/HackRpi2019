@@ -31,7 +31,7 @@ app = Flask(__name__)
 def POST_():
     json_post = request.get_json()
     #INSERT INTO DATABASE HERE
-    return , 201
+    return 201
 
 @app.route('/allEvents/<string:getrequest>',methods=['GET'])
 def GET_(getrequest):
