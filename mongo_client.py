@@ -2,8 +2,8 @@ from pymongo import MongoClient
 import datetime
 import pprint
 
-client = MongoClient()
-
+#client = MongoClient()
+client = MongoClient('mongodb+srv://orllem:K0HASRQiKuv2vkMK@cluster0-ncjwb.gcp.mongodb.net/test?retryWrites=true&w=majority')
 
 db = client.test_database
 
