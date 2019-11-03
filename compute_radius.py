@@ -1,29 +1,24 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+points = np.random.uniform(low=0.5, high=43.3, size=(50,2))
+print(points)
 
-x_points = np.random.uniform(low=0.5, high=43.3, size=(50,))
-y_points = np.random.uniform(low=0.5, high=43.3, size=(50,))
-
-# print(x_points)
-# print(np.arange(0,len(x_points)))
-
-x_center = np.random.choice(x_points)
-y_center = np.random.choice(y_points)
-
+center = points[np.random.randint(0,50)]
 radius = 10
+indices = np.where(np.linalg.norm(points-center,axis=1)<=radius)
+irrelevant_indices = np.delete(np.arange(50),indices)
+irrelevant_points = points[irrelevant_indices]
+# print("indicies",indices)
+relevantpoints = points[indices]
 
-inds_in = np.where((x_points - x_center)**2 + (y_points - y_center)**2 <= radius**2)[0]
-
-# print(inds_in)
-
-circle = plt.Circle((x_center, y_center), radius, color='r')
-
+circle = plt.Circle(center, radius, color='r')
 fig, ax = plt.subplots() # note we must use plt.subplots, not plt.subplot
-
 ax.add_artist(circle)
-ax.plot(x_points[inds_in],y_points[inds_in], 'bo')
-ax.plot(x_points[np.delete(np.arange(0,len(x_points)),inds_in)],y_points[np.delete(np.arange(0,len(y_points)),inds_in)],'go')
+ax.plot(relevantpoints[:,0],relevantpoints[:,1], 'bo')
+# ax.plot(x_points[np.delete(np.arange(0,len(x_points)),inds_in)],y_points[np.delete(np.arange(0,len(y_points)),inds_in)],'go')
+ax.plot(irrelevant_points[:,0],irrelevant_points[:,1],'go')
 ax.set_xlim([-5, 50])
 ax.set_ylim([-5, 50])
 plt.show()
+
