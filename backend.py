@@ -53,13 +53,25 @@ def GET_():
     #args format example: [4.5, [5.6,34.2]]
     # radius,x,y = parseGET(getrequest)
     center = np.asarray([x,y])
-
+    
+    urgency = list()
+    people = list()
+    description = list()
     neighborhood = list()
     for post in posts.find():
+        urgencyi = post['urgency']
+        peoplei = post['people']
+        descriptioni = post['description']
+        print("people:", peoplei)
+        print("urgenycy:", urgencyi)
+        print("description", descriptioni) 
         x,y =post['location'][0]
         x=float(x)
         y=float(y)
         # print([x,y])
+        urgency.append(urgencyi)
+        people.append(peoplei)
+        description.append(descriptioni)
         neighborhood.append([x,y])
 
     neighborhood = np.asarray(neighborhood)
@@ -69,9 +81,16 @@ def GET_():
     irrelevant_points = neighborhood[irrelevant_indices]
     # print("indicies",indices)
     relevantpoints = neighborhood[indices]
+    
     dictionary = dict()
     for i in range(relevantpoints.shape[0]):
-        dictionary["point"+str(i)] = relevantpoints[i].tolist()
+        dicti = dict()
+        dicti['people'] = people[i]
+        dicti['description'] = description[i]
+        dicti['urgency'] = urgency[i]
+        dicti["latitude"] = relevantpoints[i,0]
+        dicti["longitude"] = relevantpoints[i,1]
+        dictionary['data'+str(i)] = dicti
     print(dictionary)
 
     return dictionary,201
